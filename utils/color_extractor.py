@@ -1,24 +1,34 @@
 from colorthief import ColorThief
+from PIL import Image
 import tempfile
 
 
-def extract_colors(uploaded_file, color_count=5):
+def extract_colors(image_file):
 
-    # Reset file pointer
-    uploaded_file.seek(0)
+    # Open image
+    image = Image.open(image_file)
 
-    # Create temporary file
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
+    # Resize image
+    image = image.resize((300, 300))
 
-        temp_file.write(uploaded_file.getvalue())
+    # Crop center area
+    width, height = image.size
 
-        temp_file_path = temp_file.name
+    left = width * 0.2
+    top = height * 0.2
+    right = width * 0.8
+    bottom = height * 0.8
 
-    # Extract colors
-    color_thief = ColorThief(temp_file_path)
+    image = image.crop((left, top, right, bottom))
 
-    palette = color_thief.get_palette(
-        color_count=color_count
-    )
+    # Save temporary image
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+
+    image.save(temp_file.name)
+
+    # Extract palette
+    color_thief = ColorThief(temp_file.name)
+
+    palette = color_thief.get_palette(color_count=5)
 
     return palette
