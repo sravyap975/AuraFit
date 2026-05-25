@@ -1,3 +1,4 @@
+from utils.matcher import get_outfit_recommendations
 import streamlit as st
 from PIL import Image
 
@@ -61,3 +62,31 @@ if uploaded_file is not None:
             """,
             unsafe_allow_html=True
         )
+            # Dominant color
+    dominant_color = colors[0]
+
+    dominant_hex = '#%02x%02x%02x' % dominant_color
+
+    # Recommendations
+    recommendations = get_outfit_recommendations(
+        dominant_hex
+    )
+
+    st.subheader("Outfit Recommendations 👗")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("### Tops")
+        for item in recommendations["tops"]:
+            st.write(f"• {item}")
+
+    with col2:
+        st.markdown("### Bottoms")
+        for item in recommendations["bottoms"]:
+            st.write(f"• {item}")
+
+    with col3:
+        st.markdown("### Shoes")
+        for item in recommendations["shoes"]:
+            st.write(f"• {item}")
