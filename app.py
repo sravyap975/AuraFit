@@ -104,11 +104,11 @@ if uploaded_file is not None:
             st.write(f"• {item}")
 
 # Generate AI outfit prompt
-prompt = generate_outfit_prompt(
-    aesthetic,
-    recommendations
-)
+    prompt = generate_outfit_prompt(
+        aesthetic,
+        recommendations
+    )
 
-st.subheader("AI Outfit Prompt 🤖")
+    st.subheader("AI Outfit Prompt 🤖")
 
-st.code(prompt)
+    st.code(prompt)
