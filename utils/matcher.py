@@ -1,33 +1,45 @@
-def get_outfit_recommendations(hex_color, aesthetic):
+def get_outfit_recommendations(color, aesthetic, occasion):
 
     recommendations = {
 
         "Streetwear": {
             "tops": ["Oversized Hoodie", "Graphic Tee"],
             "bottoms": ["Cargo Pants", "Baggy Jeans"],
-            "shoes": ["Nike Dunks", "Chunky Sneakers"]
+            "shoes": ["Nike Dunks"]
         },
 
         "Old Money": {
             "tops": ["Polo Shirt", "Linen Shirt"],
-            "bottoms": ["Tailored Trousers", "Cream Pants"],
-            "shoes": ["Loafers", "Leather Shoes"]
+            "bottoms": ["Tailored Trousers"],
+            "shoes": ["Loafers"]
         },
 
         "Korean Casual": {
-            "tops": ["Neutral Cardigan", "Oversized Shirt"],
-            "bottoms": ["Wide-fit Pants", "Black Trousers"],
-            "shoes": ["White Sneakers", "Canvas Shoes"]
+            "tops": ["Neutral Cardigan"],
+            "bottoms": ["Wide-fit Pants"],
+            "shoes": ["Canvas Shoes"]
         },
 
         "Minimalist": {
-            "tops": ["Plain Black Tee", "Neutral Sweatshirt"],
-            "bottoms": ["Slim Black Jeans", "Grey Trousers"],
-            "shoes": ["White Sneakers", "Chelsea Boots"]
+            "tops": ["Plain Black Tee"],
+            "bottoms": ["Grey Trousers"],
+            "shoes": ["White Sneakers"]
         }
     }
 
-    return recommendations.get(
+    outfit = recommendations.get(
         aesthetic,
         recommendations["Minimalist"]
     )
+
+    # Occasion logic
+    if occasion == "Party":
+        outfit["shoes"].append("Chunky Sneakers")
+
+    elif occasion == "Office":
+        outfit["shoes"].append("Formal Loafers")
+
+    elif occasion == "College":
+        outfit["shoes"].append("Canvas Sneakers")
+
+    return outfit
