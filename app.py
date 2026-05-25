@@ -13,6 +13,16 @@ st.set_page_config(
 # Title
 st.title("AuraFit 👕✨")
 st.write("AI-powered outfit matching assistant")
+# Fashion aesthetic selector
+aesthetic = st.selectbox(
+    "Choose your fashion aesthetic",
+    [
+        "Streetwear",
+        "Old Money",
+        "Korean Casual",
+        "Minimalist"
+    ]
+)
 
 # Upload section
 uploaded_file = st.file_uploader(
@@ -69,8 +79,9 @@ if uploaded_file is not None:
 
     # Recommendations
     recommendations = get_outfit_recommendations(
-        dominant_hex
-    )
+    dominant_hex,
+    aesthetic
+)
 
     st.subheader("Outfit Recommendations 👗")
 
