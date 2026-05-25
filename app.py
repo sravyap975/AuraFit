@@ -1,3 +1,4 @@
+from utils.prompt_builder import generate_outfit_prompt
 from utils.matcher import get_outfit_recommendations
 import streamlit as st
 from PIL import Image
@@ -101,3 +102,13 @@ if uploaded_file is not None:
         st.markdown("### Shoes")
         for item in recommendations["shoes"]:
             st.write(f"• {item}")
+
+# Generate AI outfit prompt
+prompt = generate_outfit_prompt(
+    aesthetic,
+    recommendations
+)
+
+st.subheader("AI Outfit Prompt 🤖")
+
+st.code(prompt)
